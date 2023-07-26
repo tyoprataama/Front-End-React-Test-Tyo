@@ -30,42 +30,22 @@ const Card = ({questionData, onAnswerSubmit}) => {
     <p>{question}</p>
      <form onSubmit={handleSubmit}>
         {options?.map((answer, index) => (
-          <>
-            <input
-              type="radio"
-              className = 'w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 dark:focus:ring-indigo-600'
-              value={answer}
-              checked={selectedAnswer === answer}
-              onChange={() => setSelectedAnswer(answer)}
-              disabled={isLocked}
-            />
-            <label htmlFor={`question-${index}`} key={index} className="ml-2 text-sm font-medium text-black">
-            {answer}
-          </label>
-          </>
+            <label key={index} className="block">
+              <input
+                type="radio"
+                value={answer}
+                checked={selectedAnswer === answer}
+                onChange={() => setSelectedAnswer(answer)}
+                disabled={isLocked}
+                className="mr-2" // Add some spacing between the radio button and the label
+              />
+              {answer}
+            </label>
         ))}
-        <button type="submit" disabled={isLocked || !selectedAnswer}>
-          Submit
-        </button>
       </form>
-    {/* {options.map((option, index) => (
-        <div key={index} className="flex items-center flex items-center mb-4 mt-3">
-          <input
-            type="radio"
-            className = 'w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-500 dark:focus:ring-indigo-600'
-            id={`question-${index}`}
-            value={option}
-            checked={selectedOption === option}
-            onChange={() => onOptionChange(option)}
-          />
-          <label htmlFor={`question-${index}`} className="ml-2 text-sm font-medium text-black">
-            {option}
-          </label>
-        </div>
-      ))} */}
   </div>
    {!isLocked && (
-        <button onClick={handleNextQuestion} disabled={currentQuestionIndex === question.length - 1}>
+        <button className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 mt-5" onClick={handleNextQuestion} disabled={currentQuestionIndex === question.length - 1}>
           Next
         </button>
       )}
