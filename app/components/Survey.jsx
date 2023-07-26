@@ -78,8 +78,8 @@ const Survey = () => {
         <End surveyAnswers={surveyAnswers} onRestart={handleRestartSurvey} />
       ) : (
         <>
-        <div className='p-4'>
-            <p>Time Left: {timer} seconds</p>
+        <div className='p-4 flex flex-col items-center justify-center'>
+            <p className='max-w-sm p-6 bg-white border border-none rounded-lg shadow'>Time Left: {timer} seconds</p>
           </div>
           <Card
             questionData={questions[currentQuestionIndex]}

@@ -20,7 +20,7 @@ const Card = ({questionData, onAnswerSubmit, currentQuestionIndex}) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen">
+    <div className="flex flex-col items-center justify-center h-screen w-screen mb-32">
       <div className="max-w-sm p-6 bg-white border border-none rounded-lg shadow">
         <h1>{num}</h1>
         <p>{question}</p>
