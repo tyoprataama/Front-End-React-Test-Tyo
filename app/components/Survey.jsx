@@ -11,6 +11,12 @@ import { questionDetails } from './Question';
 const Survey = () => {
   const questions = questionDetails;
 
+  // State to keep track of the user's name
+  const [userName, setUserName] = useState("");
+
+    // State to keep track of whether the survey has started
+    const [surveyStarted, setSurveyStarted] = useState(false);
+
   // State to keep track of current question index
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
@@ -48,6 +54,8 @@ const Survey = () => {
     setTimer(15);
     setTimerActive(true);
     setSurveyComplete(false);
+    setUserName("");
+    setSurveyStarted(false)
   };
 
   // Function to handle timer completion
@@ -69,26 +77,70 @@ const Survey = () => {
     return () => clearInterval(interval);
   }, [timer, timerActive]);
 
+  const canStartSurvey = userName.trim().length >= 3;
+  const handleStartSurvey = () => {
+    if (canStartSurvey) {
+      setSurveyStarted(true);
+    }
+  };
+
   return (
-    <div>
-      <div className="bg-indigo-300 h-1 w-full mt-10 px-5">
-              <div className="bg-indigo-500 h-full" style={{ width: `${(currentQuestionIndex + 1) / questions.length * 100}%` }} />
-            </div>
-      {surveyComplete ? (
-        <End surveyAnswers={surveyAnswers} onRestart={handleRestartSurvey} />
-      ) : (
+      <div>
+      {!surveyStarted && (
+      //    <div className="flex flex-col items-center justify-center h-screen w-screen mb-32">
+      // <div className="max-w-sm p-6 bg-white border border-none rounded-lg shadow">
+        <div className='className="flex flex-col items-center justify-center h-screen w-screen mb-32'>
+          <div className="max-w-sm p-6 bg-white border border-none rounded-lg shadow">
+          <p>Please enter your name (minimum 3 characters):</p>
+          <input
+            type="text"
+            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            placeholder = "John"
+            required
+          />
+          <button className='text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 mt-5' onClick={handleStartSurvey} disabled={!canStartSurvey}>
+            Start Survey
+          </button>
+        </div>
+        </div>
+      )}
+      {surveyStarted && !surveyComplete && (
         <>
-        <div className='p-4 flex flex-col items-center justify-center'>
-            <p className='max-w-sm p-6 bg-white border border-none rounded-lg shadow'>Time Left: {timer} seconds</p>
-          </div>
+        <div className="bg-indigo-300 h-1 w-full mt-10 px-5">
+        <div className="bg-indigo-500 h-full" style={{ width: `${(currentQuestionIndex + 1) / questions.length * 100}%` }} />
+      </div>
+      < div className = 'p-4 flex flex-col items-center justify-center' >
+     <p className='max-w-sm p-6 bg-white border border-none rounded-lg shadow'>Time Left: {timer} seconds</p>
+      </div>
           <Card
             questionData={questions[currentQuestionIndex]}
             onAnswerSubmit={handleAnswerSubmit}
             currentQuestionIndex={currentQuestionIndex}
+            userName={userName} // Pass the userName to the Card component
           />
         </>
       )}
+      {surveyComplete && (
+        <End surveyAnswers={surveyAnswers} onRestart={handleRestartSurvey} />
+      )}
     </div>
-  )
+  );
+        // <>
+        //       <div className="bg-indigo-300 h-1 w-full mt-10 px-5">
+        //       <div className="bg-indigo-500 h-full" style={{ width: `${(currentQuestionIndex + 1) / questions.length * 100}%` }} />
+        //     </div>
+        //     <div className='p-4 flex flex-col items-center justify-center'>
+        //     <p className='max-w-sm p-6 bg-white border border-none rounded-lg shadow'>Time Left: {timer} seconds</p>
+        //   </div>
+        //   <Card
+        //     questionData={questions[currentQuestionIndex]}
+        //     onAnswerSubmit={handleAnswerSubmit}
+        //     currentQuestionIndex={currentQuestionIndex}
+        //     userName={userName} // Pass the userName to the Card component
+        //   />
+        // </>
+
 };
 export default Survey
