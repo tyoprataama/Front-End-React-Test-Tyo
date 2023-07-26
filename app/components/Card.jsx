@@ -2,16 +2,10 @@ import React, {
   useState
 } from "react";
 
-const Card = ({questionData, onAnswerSubmit}) => {
-  const {
-    question,
-    options,
-    num,
-    isLocked,
-    currentQuestionIndex
-  } = questionData;
+const Card = ({questionData, onAnswerSubmit, currentQuestionIndex}) => {
+   const { question, options, num, isLocked } = questionData;
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const isLastQuestion = currentQuestionIndex === questionData.length - 1;
+  const isLastQuestion = currentQuestionIndex === options.length;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,8 +43,8 @@ const Card = ({questionData, onAnswerSubmit}) => {
       {!isLocked && (
         <button
           className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 mt-5"
-          onClick={isLastQuestion ? handleSubmit : handleNextQuestion}
-          disabled={isLastQuestion && (!selectedAnswer || isLocked)}
+          onClick={handleNextQuestion}
+          disabled={!selectedAnswer}
         >
           {isLastQuestion ? "Submit" : "Next"}
         </button>
