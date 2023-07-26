@@ -5,34 +5,11 @@ import React, {
 } from 'react';
 import Card from './Card';
 import End from './End';
+import { questionDetails } from './Question';
 
 
 const Survey = () => {
-  const questions = [{
-      num: 'Q1',
-      question: 'How often do you shop online?',
-      options: ['Rarely', 'Sometimes', 'Frequently'],
-      isLocked: false,
-    },
-    {
-      num: 'Q2',
-      question: 'How often do you shop offline?',
-      options: ['Rarely', 'Sometimes', 'Frequently'],
-      isLocked: false,
-    },
-    {
-      num: 'Q3',
-      question: 'How often do you shop hybrid?',
-      options: ['Rarely', 'Sometimes', 'Frequently'],
-      isLocked: false,
-    },
-    {
-      num: 'Q4',
-      question: 'How often do you shop paypall?',
-      options: ['Rarely', 'Sometimes', 'Frequently'],
-      isLocked: false,
-    },
-  ];
+  const questions = questionDetails;
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [surveyAnswers, setSurveyAnswers] = useState(() => {
@@ -62,9 +39,14 @@ const Survey = () => {
     setCurrentQuestionIndex(0);
   };
    const currentQuestionData = questions[currentQuestionIndex];
+    const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
 
     return ( 
-        <div className="flex flex-col items-center justify-center h-screen w-screen">
+      
+        <div className="flex flex-col items-center justify-center h-screen w-screen px-5 py-3">
+          <div className="bg-indigo-300 h-1 w-full mt-4">
+        <div className="bg-indigo-500 h-full" style={{ width: `${progressPercent}%` }} />
+      </div>
  {currentQuestionIndex < questions.length ? (
         <Card
           questionData={currentQuestionData}
