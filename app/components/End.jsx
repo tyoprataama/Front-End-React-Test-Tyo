@@ -9,7 +9,7 @@ const End = ({
       onRestart();
     };
   return (
-       <div className="flex flex-col items-center justify-center h-screen w-screen">
+       <div className="flex flex-col items-center justify-center h-screen w-screen p-6">
   <div className="max-w-sm p-6 bg-white border border-none rounded-lg shadow">
       <h2>Survey Completed!</h2>
       <p>Thank you {userName} for completing the survey.</p>

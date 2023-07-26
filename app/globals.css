@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 
 
@@ -8,4 +9,15 @@ body {
   background: rgb(255, 161, 116);
   background: linear-gradient(0deg, rgba(255, 161, 116, 1) 0%, rgba(234, 213, 255, 1) 100%);
   background-repeat: no-repeat;
+  font-family: 'Inter',
+  sans-serif;
+}
+.head{
+  font-size: 40px;
+}
+.paragrap{
+  font-size: 25px;
+}
+.option{
+  font-size: 20px;
 }

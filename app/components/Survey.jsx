@@ -104,7 +104,7 @@ const Survey = () => {
       {!surveyStarted && (
         <div className="flex flex-col items-center justify-center h-screen">
   <div className="max-w-sm p-6 bg-white border border-none rounded-lg shadow">
-    <p>Please enter your name (minimum 3 characters):</p>
+    <p>Please enter your name <span className='text-rose-600 font-semibold'> (minimum 3 characters):</span></p>
     <input
       type="text"
       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -126,7 +126,7 @@ const Survey = () => {
       {surveyStarted && !surveyComplete && (
         <>
           <div className="p-4 flex flex-col items-center justify-center gap-4 h-screen">
-            <div className="bg-indigo-300 h-1 w-full px-5">
+            <div className="bg-indigo-300 h-1 w-full">
               <div className="bg-indigo-500 h-full" style={{ width: `${(currentQuestionIndex + 1) / questions.length * 100}%` }} />
             </div>
           <p className='max-w-sm p-6 bg-white border border-none rounded-lg shadow mt-10'>Time Left: {timer} seconds</p>
