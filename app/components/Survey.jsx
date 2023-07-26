@@ -14,8 +14,8 @@ const Survey = () => {
   // State to keep track of the user's name
   const [userName, setUserName] = useState("");
 
-    // State to keep track of whether the survey has started
-    const [surveyStarted, setSurveyStarted] = useState(false);
+  // State to keep track of whether the survey has started
+  const [surveyStarted, setSurveyStarted] = useState(false);
 
   // State to keep track of current question index
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -27,7 +27,7 @@ const Survey = () => {
   const [timer, setTimer] = useState(15);
 
   // State to track if the timer is active
-  const [timerActive, setTimerActive] = useState(true);
+  const [isTimerActive, setIsTimerActive] = useState(false);
 
   // State to track if the survey is complete
   const [surveyComplete, setSurveyComplete] = useState(false);
@@ -49,24 +49,24 @@ const Survey = () => {
   };
   // Function to restart the survey
   const handleRestartSurvey = () => {
+    setUserName(""); // Reset the user's name
+    setSurveyStarted(false); // Reset survey started status
     setSurveyAnswers([]);
     setCurrentQuestionIndex(0);
     setTimer(15);
-    setTimerActive(true);
+    setIsTimerActive(false); // Reset timer activation status
     setSurveyComplete(false);
-    setUserName("");
-    setSurveyStarted(false)
   };
 
   // Function to handle timer completion
   const handleTimerCompletion = () => {
-    setTimerActive(false); // Pause the timer
+    setIsTimerActive(false); // Pause the timer
     setSurveyComplete(true); // Mark the survey as complete
   };
 
   useEffect(() => {
     let interval;
-    if (timerActive && timer > 0) {
+    if (isTimerActive && timer > 0) {
       interval = setInterval(() => {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
@@ -75,12 +75,13 @@ const Survey = () => {
     }
 
     return () => clearInterval(interval);
-  }, [timer, timerActive]);
+  }, [timer, isTimerActive]);
 
   const canStartSurvey = userName.trim().length >= 3;
   const handleStartSurvey = () => {
     if (canStartSurvey) {
       setSurveyStarted(true);
+      setIsTimerActive(true);
     }
   };
 
@@ -123,24 +124,11 @@ const Survey = () => {
         </>
       )}
       {surveyComplete && (
-        <End surveyAnswers={surveyAnswers} onRestart={handleRestartSurvey} />
+        <End surveyAnswers={surveyAnswers} onRestart={handleRestartSurvey} userName={userName} />
       )}
     </div>
   );
-        // <>
-        //       <div className="bg-indigo-300 h-1 w-full mt-10 px-5">
-        //       <div className="bg-indigo-500 h-full" style={{ width: `${(currentQuestionIndex + 1) / questions.length * 100}%` }} />
-        //     </div>
-        //     <div className='p-4 flex flex-col items-center justify-center'>
-        //     <p className='max-w-sm p-6 bg-white border border-none rounded-lg shadow'>Time Left: {timer} seconds</p>
-        //   </div>
-        //   <Card
-        //     questionData={questions[currentQuestionIndex]}
-        //     onAnswerSubmit={handleAnswerSubmit}
-        //     currentQuestionIndex={currentQuestionIndex}
-        //     userName={userName} // Pass the userName to the Card component
-        //   />
-        // </>
+       
 
 };
 export default Survey
