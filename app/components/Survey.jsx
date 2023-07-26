@@ -114,7 +114,7 @@ const Survey = () => {
       required
     />
     <button
-      className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 mt-2"
+      className="cursor-pointer text-white bg-violet-700 hover:bg-violet-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 mt-2"
       onClick={handleStartSurvey}
       disabled={!canStartSurvey}
     >

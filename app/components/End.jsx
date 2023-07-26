@@ -14,7 +14,7 @@ const End = ({
       <h2>Survey Completed!</h2>
       <p>Thank you {userName} for completing the survey.</p>
       {/* Display survey answers or perform any required analysis */}
-      <button className='text-white bg-purple-700 hover:bg-purple-800 mt-3 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2' onClick={handleRestart}>Restart Survey</button>
+      <button className='cursor-pointer text-white bg-violet-700 hover:bg-violet-800 mt-3 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2' onClick={handleRestart}>Restart Survey</button>
     </div>
     </div>
   )
